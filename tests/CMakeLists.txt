@@ -58,6 +58,15 @@ function(otclient_add_gtest TARGET_NAME)
     gtest_discover_tests(${TARGET_NAME})
 endfunction()
 
-add_subdirectory(map)
-add_subdirectory(stdext)
-add_subdirectory(otml)
+if(OTCLIENT_COMBINE_TESTS)
+    # GoogleTest discovery still runs each named test in its own process.
+    otclient_add_gtest(otclient_tests
+        map/map_spectators_test.cpp
+        stdext/string_encoding_test.cpp
+        otml/otml_alias_test.cpp
+    )
+else()
+    add_subdirectory(map)
+    add_subdirectory(stdext)
+    add_subdirectory(otml)
+endif()

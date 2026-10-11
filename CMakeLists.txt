@@ -143,6 +143,7 @@ endif()
 # Src
 option(OTCLIENT_BUILD_TESTS "Build unit tests" ON)
 option(ENABLE_TEST_LTO "Link tests against the production LTO library" ON)
+option(OTCLIENT_COMBINE_TESTS "Use one executable while keeping each CTest case isolated" OFF)
 add_subdirectory(src)
 
 

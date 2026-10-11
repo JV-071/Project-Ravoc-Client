@@ -159,7 +159,8 @@
       "description": "Disable PCH so compiler objects can be cached; preserve production optimization and runtime settings",
       "cacheVariables": {
         "TOGGLE_PRE_COMPILED_HEADER": "OFF",
-        "ENABLE_TEST_LTO": "OFF"
+        "ENABLE_TEST_LTO": "OFF",
+        "OTCLIENT_COMBINE_TESTS": "ON"
       }
     },
     {
@@ -169,7 +170,8 @@
       "description": "Disable PCH so compiler objects can be cached; preserve production optimization and runtime settings",
       "cacheVariables": {
         "TOGGLE_PRE_COMPILED_HEADER": "OFF",
-        "ENABLE_TEST_LTO": "OFF"
+        "ENABLE_TEST_LTO": "OFF",
+        "OTCLIENT_COMBINE_TESTS": "ON"
       }
     },
     {
@@ -181,7 +183,8 @@
         "TOGGLE_PRE_COMPILED_HEADER": "OFF",
         "OPTIONS_ENABLE_CCACHE": "ON",
         "OPTIONS_ENABLE_SCCACHE": "OFF",
-        "ENABLE_TEST_LTO": "OFF"
+        "ENABLE_TEST_LTO": "OFF",
+        "OTCLIENT_COMBINE_TESTS": "ON"
       }
     },
     {
@@ -193,7 +196,8 @@
         "TOGGLE_PRE_COMPILED_HEADER": "OFF",
         "OPTIONS_ENABLE_CCACHE": "ON",
         "OPTIONS_ENABLE_SCCACHE": "OFF",
-        "ENABLE_TEST_LTO": "OFF"
+        "ENABLE_TEST_LTO": "OFF",
+        "OTCLIENT_COMBINE_TESTS": "ON"
       }
     }
   ],
