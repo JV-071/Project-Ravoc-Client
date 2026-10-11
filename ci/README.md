@@ -5,3 +5,5 @@ Separate persistent caches cover dependency packages, downloads and compiler obj
 Diagnostics include runner/compiler versions, CMake configuration, compiler cache statistics and CTest JUnit. Unit tests fail when none are discovered.
 Server database integration tests require a separately configured database and are not executed by the Windows unit-test job.
 Cold and warm runs must pass before improvements are considered measured. Legacy workflows are retained with .reference suffixes; automatic release publication is disabled.
+
+The binding generator uses Lua pattern escapes compatible with LuaJIT; the original Lua 5.1 output was preserved in type conversion and header-generation comparisons.

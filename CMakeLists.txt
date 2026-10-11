@@ -1,5 +1,11 @@
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
+# Keep MSVC debug information cacheable without losing the linked PDB.
+if(POLICY CMP0141)
+    cmake_policy(SET CMP0141 NEW)
+    set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<$<CONFIG:Debug,RelWithDebInfo>:Embedded>")
+endif()
+
 # CMAKE
 # apt install build-essential git
 # git clone https://github.com/Kitware/CMake/; cd CMake

@@ -28,7 +28,9 @@
       },
       "vendor": {
         "microsoft.com/VisualStudioSettings/CMake/1.0": {
-          "hostOS": [ "Windows" ]
+          "hostOS": [
+            "Windows"
+          ]
         }
       },
       "condition": {
@@ -149,6 +151,46 @@
         "ASAN_ENABLED": "ON",
         "BUILD_STATIC_LIBRARY": "OFF"
       }
+    },
+    {
+      "name": "windows-debug-cache",
+      "inherits": "windows-debug",
+      "displayName": "Windows Debug - compiler cache",
+      "description": "Disable PCH so compiler objects can be cached; preserve production optimization and runtime settings",
+      "cacheVariables": {
+        "TOGGLE_PRE_COMPILED_HEADER": "OFF"
+      }
+    },
+    {
+      "name": "windows-release-cache",
+      "inherits": "windows-release",
+      "displayName": "Windows Release - compiler cache",
+      "description": "Disable PCH so compiler objects can be cached; preserve production optimization and runtime settings",
+      "cacheVariables": {
+        "TOGGLE_PRE_COMPILED_HEADER": "OFF"
+      }
+    },
+    {
+      "name": "linux-debug-cache",
+      "inherits": "linux-debug",
+      "displayName": "Linux Debug - compiler cache",
+      "description": "Disable PCH so compiler objects can be cached; preserve production optimization and runtime settings",
+      "cacheVariables": {
+        "TOGGLE_PRE_COMPILED_HEADER": "OFF",
+        "OPTIONS_ENABLE_CCACHE": "ON",
+        "OPTIONS_ENABLE_SCCACHE": "OFF"
+      }
+    },
+    {
+      "name": "linux-release-cache",
+      "inherits": "linux-release",
+      "displayName": "Linux Release - compiler cache",
+      "description": "Disable PCH so compiler objects can be cached; preserve production optimization and runtime settings",
+      "cacheVariables": {
+        "TOGGLE_PRE_COMPILED_HEADER": "OFF",
+        "OPTIONS_ENABLE_CCACHE": "ON",
+        "OPTIONS_ENABLE_SCCACHE": "OFF"
+      }
     }
   ],
   "buildPresets": [
@@ -183,6 +225,64 @@
     {
       "name": "macos-debug",
       "configurePreset": "macos-debug"
+    },
+    {
+      "name": "windows-debug-cache",
+      "configurePreset": "windows-debug-cache"
+    },
+    {
+      "name": "windows-release-cache",
+      "configurePreset": "windows-release-cache"
+    },
+    {
+      "name": "linux-debug-cache",
+      "configurePreset": "linux-debug-cache"
+    },
+    {
+      "name": "linux-release-cache",
+      "configurePreset": "linux-release-cache"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "windows-debug-cache",
+      "configurePreset": "windows-debug-cache",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      }
+    },
+    {
+      "name": "windows-release-cache",
+      "configurePreset": "windows-release-cache",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      }
+    },
+    {
+      "name": "linux-debug-cache",
+      "configurePreset": "linux-debug-cache",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      }
+    },
+    {
+      "name": "linux-release-cache",
+      "configurePreset": "linux-release-cache",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      }
     }
   ]
 }
