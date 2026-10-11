@@ -30,6 +30,13 @@
 #include <framework/core/eventdispatcher.h>
 
 #include <sys/stat.h>
+#include <ifaddrs.h>
+#include <net/if.h>
+#ifdef __APPLE__
+#include <net/if_dl.h>
+#else
+#include <netpacket/packet.h>
+#endif
 
 #ifdef ANDROID
 #include <errno.h>
@@ -226,6 +233,42 @@ std::string Platform::getOSName()
         return res;
     }
     return std::string();
+}
+
+std::vector<std::string> Platform::getMacAddresses()
+{
+    std::vector<std::string> addresses;
+    ifaddrs* interfaces = nullptr;
+    if (getifaddrs(&interfaces) != 0)
+        return addresses;
+
+    for (const auto* interface = interfaces; interface; interface = interface->ifa_next) {
+        if (!interface->ifa_addr || (interface->ifa_flags & IFF_LOOPBACK))
+            continue;
+#ifdef __APPLE__
+        if (interface->ifa_addr->sa_family != AF_LINK)
+            continue;
+        const auto* link = reinterpret_cast<const sockaddr_dl*>(interface->ifa_addr);
+        const auto* bytes = reinterpret_cast<const unsigned char*>(LLADDR(link));
+        const auto length = link->sdl_alen;
+#else
+        if (interface->ifa_addr->sa_family != AF_PACKET)
+            continue;
+        const auto* link = reinterpret_cast<const sockaddr_ll*>(interface->ifa_addr);
+        const auto* bytes = link->sll_addr;
+        const auto length = link->sll_halen;
+#endif
+        if (length == 0)
+            continue;
+        std::string address;
+        for (unsigned int i = 0; i < length; ++i)
+            address += fmt::format("{:02x}", bytes[i]);
+        addresses.push_back(std::move(address));
+    }
+    freeifaddrs(interfaces);
+    std::sort(addresses.begin(), addresses.end());
+    addresses.erase(std::unique(addresses.begin(), addresses.end()), addresses.end());
+    return addresses;
 }
 
 std::string Platform::traceback(const std::string_view where, int level, int maxDepth)
