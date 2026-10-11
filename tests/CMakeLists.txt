@@ -8,6 +8,11 @@ if(TARGET otclient_test_core)
 endif()
 
 function(otclient_add_gtest TARGET_NAME)
+    if(OTCLIENT_COMBINE_TESTS AND NOT TARGET_NAME STREQUAL "otclient_tests")
+        target_sources(otclient_tests PRIVATE ${ARGN})
+        return()
+    endif()
+
     add_executable(${TARGET_NAME} ${ARGN})
 
     set_target_properties(${TARGET_NAME} PROPERTIES
@@ -59,14 +64,10 @@ function(otclient_add_gtest TARGET_NAME)
 endfunction()
 
 if(OTCLIENT_COMBINE_TESTS)
+    # Existing test modules contribute sources through the same helper.
     # GoogleTest discovery still runs each named test in its own process.
-    otclient_add_gtest(otclient_tests
-        map/map_spectators_test.cpp
-        stdext/string_encoding_test.cpp
-        otml/otml_alias_test.cpp
-    )
-else()
-    add_subdirectory(map)
-    add_subdirectory(stdext)
-    add_subdirectory(otml)
+    otclient_add_gtest(otclient_tests)
 endif()
+add_subdirectory(map)
+add_subdirectory(stdext)
+add_subdirectory(otml)
