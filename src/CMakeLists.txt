@@ -511,6 +511,12 @@ if(TOGGLE_PRE_COMPILED_HEADER)
   target_precompile_headers(otclient_core PRIVATE framework/pch.h)
   message(STATUS "Use precompiled header: ON")
 else()
+  # Preserve PCH-provided declarations without requiring a precompiled artifact.
+  if(MSVC)
+    target_compile_options(otclient_core PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:/FI${CMAKE_CURRENT_SOURCE_DIR}/framework/pch.h>")
+  else()
+    target_compile_options(otclient_core PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:SHELL:-include ${CMAKE_CURRENT_SOURCE_DIR}/framework/pch.h>")
+  endif()
   message(STATUS "Use precompiled header: OFF")
 endif(TOGGLE_PRE_COMPILED_HEADER)
 
