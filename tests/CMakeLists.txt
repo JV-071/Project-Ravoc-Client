@@ -2,6 +2,11 @@ find_package(GTest CONFIG REQUIRED)
 
 include(GoogleTest)
 
+set(OTCLIENT_TEST_CORE otclient_core)
+if(TARGET otclient_test_core)
+    set(OTCLIENT_TEST_CORE otclient_test_core)
+endif()
+
 function(otclient_add_gtest TARGET_NAME)
     add_executable(${TARGET_NAME} ${ARGN})
 
@@ -16,7 +21,7 @@ function(otclient_add_gtest TARGET_NAME)
 
     target_link_libraries(${TARGET_NAME}
         PRIVATE
-            otclient_core
+            ${OTCLIENT_TEST_CORE}
             GTest::gtest
             GTest::gtest_main
     )
@@ -47,6 +52,9 @@ function(otclient_add_gtest TARGET_NAME)
         endif()
     endif()
 
+    if(TARGET otclient_test_core)
+        set_property(TARGET ${TARGET_NAME} PROPERTY INTERPROCEDURAL_OPTIMIZATION FALSE)
+    endif()
     gtest_discover_tests(${TARGET_NAME})
 endfunction()
 

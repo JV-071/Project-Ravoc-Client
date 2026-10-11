@@ -158,7 +158,8 @@
       "displayName": "Windows Debug - compiler cache",
       "description": "Disable PCH so compiler objects can be cached; preserve production optimization and runtime settings",
       "cacheVariables": {
-        "TOGGLE_PRE_COMPILED_HEADER": "OFF"
+        "TOGGLE_PRE_COMPILED_HEADER": "OFF",
+        "ENABLE_TEST_LTO": "OFF"
       }
     },
     {
@@ -167,7 +168,8 @@
       "displayName": "Windows Release - compiler cache",
       "description": "Disable PCH so compiler objects can be cached; preserve production optimization and runtime settings",
       "cacheVariables": {
-        "TOGGLE_PRE_COMPILED_HEADER": "OFF"
+        "TOGGLE_PRE_COMPILED_HEADER": "OFF",
+        "ENABLE_TEST_LTO": "OFF"
       }
     },
     {
@@ -178,7 +180,8 @@
       "cacheVariables": {
         "TOGGLE_PRE_COMPILED_HEADER": "OFF",
         "OPTIONS_ENABLE_CCACHE": "ON",
-        "OPTIONS_ENABLE_SCCACHE": "OFF"
+        "OPTIONS_ENABLE_SCCACHE": "OFF",
+        "ENABLE_TEST_LTO": "OFF"
       }
     },
     {
@@ -189,7 +192,8 @@
       "cacheVariables": {
         "TOGGLE_PRE_COMPILED_HEADER": "OFF",
         "OPTIONS_ENABLE_CCACHE": "ON",
-        "OPTIONS_ENABLE_SCCACHE": "OFF"
+        "OPTIONS_ENABLE_SCCACHE": "OFF",
+        "ENABLE_TEST_LTO": "OFF"
       }
     }
   ],
