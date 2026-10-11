@@ -393,3 +393,7 @@ assets_crypto.py
 __pycache__/
 records/
 _wip_stance_icons/
+
+# Local CI tools and dependency/compiler caches
+/.tools/
+/.cache/
