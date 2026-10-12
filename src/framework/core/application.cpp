@@ -226,5 +226,7 @@ std::string Application::getBuildRevision()
     ss << std::fixed << std::setprecision(3) << (static_cast<float>(GIT_COMMITS) / 1000);
     return ss.str();
 }
+// Keep date-sensitive metadata in this translation unit, not every consumer.
+std::string Application::getBuildDate() { return std::string{ __DATE__ }; }
 std::string Application::getVersion() { return ADD_QUOTES(GIT_VERSION); }
 std::string Application::getBuildCommit() { return ADD_QUOTES(GIT_BRANCH); }
